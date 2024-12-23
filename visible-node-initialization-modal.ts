@@ -48,9 +48,13 @@ export class VisibleNodeInitializationModal extends Modal {
                         return noViewRequirements ? f : null;
                     }))).filter(f => f != null);
                 noViewRequirementsFiles.forEach(async f => {
+                    if (f == null) {
+                        new Notice('File issue 1', 0);
+                        return;
+                    }
                     const copyPath = `${childDirectory}/${fileNameFromPath(f.path)}.md`;
                     const copy = plugin.app.vault.getFileByPath(copyPath);
-                    if (copy) {
+                    if (copy != null) {
                         await plugin.app.vault.delete(copy);
                     }
                     await plugin.app.vault.copy(f, copyPath)
@@ -70,6 +74,10 @@ export class VisibleNodeInitializationModal extends Modal {
                         return linklessViewRequirements ? f : null;
                     }))).filter(f => f != null);
                 linklessViewRequirementsFiles.forEach(async f => {
+                    if (f == null) {
+                        new Notice('File issue 2', 0);
+                        return;
+                    }
                     await addToPlayerConditionals(plugin, child, f);
                 });
                 new Notice(`Synced ${noViewRequirementsFiles.length} files, and ensured ${linklessViewRequirementsFiles.length} files in Player Conditionals`);
