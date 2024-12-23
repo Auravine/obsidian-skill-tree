@@ -6,7 +6,7 @@ import { SkillTreePluginSettings, SkillTreeSettingTab, DEFAULT_SETTINGS } from '
 import { VisibleNodeInitializationModal } from 'visible-node-initialization-modal';
 
 export default class SkillTreePlugin extends Plugin {
-	settings: SkillTreePluginSettings;
+	settings!: SkillTreePluginSettings;
 
 	async onload() {
 		
